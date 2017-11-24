@@ -90,4 +90,4 @@ def display_image(integ, data, labels, ln, transpose=True):
 if (__name__ == "__main__"):
     ll, dd, ltest, dtest, ln = load_multiple_torch()
     pickle_object((ll, dd, ln), where_am_i() + "/train_set.pkl")
-    pickle_object((ltest, dtest, ln), where_am_i() + "/est_set.pkl")
+    pickle_object((ltest, dtest, ln), where_am_i() + "/test_set.pkl")
