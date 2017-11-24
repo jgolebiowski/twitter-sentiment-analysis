@@ -7,3 +7,5 @@ data_batch_3
 data_batch_5
 test_batch 
 __pycache__
+
+*\.pkl

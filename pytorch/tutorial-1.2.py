@@ -2,9 +2,8 @@ import torch
 from torch.autograd import Variable
 import torch.nn as nn
 
+
 # Define a NN module
-
-
 class MyNetwork(nn.Module):
     """My neural network"""
 
