@@ -60,4 +60,5 @@ def embed_dataset(data, labels):
             # if i % 100 == 0:
             #     print(sentence, labels[i], labs[-1])
 
+    labs = torch.LongTensor(labs).unsqueeze_(1)
     return dataset, labs

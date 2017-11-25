@@ -14,7 +14,6 @@ with open(filename, "rb") as fp:
 data = data[0:100]
 labs = labs[0:100]
 
-labs = torch.LongTensor(labs).unsqueeze_(1)
 n_input, n_output = data[0].size(2), int(labs.max() + 1)
 n_hidden = 128
 n_layers = 2

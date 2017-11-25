@@ -18,7 +18,6 @@ filename = "trained_model.pkl"
 with open(filename, "rb") as fp:
     net = pickle.load(fp)
 
-labs = torch.LongTensor(labs).unsqueeze_(1)
 n_input, n_output = data[0].size(2), int(labs.max() + 1)
 n_hidden = net.n_hidden
 n_layers = net.n_layers
