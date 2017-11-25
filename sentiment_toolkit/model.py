@@ -17,6 +17,8 @@ class MySecondRNN(nn.Module):
             n of input features
         n_hidden : int
             size of the hidden layer
+        n_layers : int
+            number of hidden layers
         n_output : int
             n of output features
         """
