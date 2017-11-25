@@ -55,7 +55,7 @@ optimizer = optim.Adam(net.parameters())
 
 
 nMini = 10
-for epoch in range(5):
+for epoch in range(7):
     running_loss = 0
     for pointer in range(0, d.size(0) // nMini):
         inputs = d[pointer * nMini: (pointer + 1) * nMini]
