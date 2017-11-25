@@ -25,7 +25,7 @@ print(net)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(net.parameters())
 
-for epoch in range(50):
+for epoch in range(10):
     running_loss = 0
     for iteration in range(len(data)):
         inputs = data[iteration]
@@ -47,3 +47,8 @@ for epoch in range(50):
             print('(%d, %5d) loss: %.5e' %
                   (epoch, iteration, running_loss / 100))
             running_loss = 0.0
+
+net.zero_grad()
+filename = "trained_model.pkl"
+with open(filename, "wb") as fp:
+    pickle.dump(net, fp)
