@@ -11,8 +11,8 @@ filename = "dataset/train_dataset.pkl"
 with open(filename, "rb") as fp:
     data, labs, labels2names = pickle.load(fp)
 
-data = data[0:200]
-labs = labs[0:200]
+data = data
+labs = labs
 
 filename = "trained_model.pkl"
 with open(filename, "rb") as fp:
