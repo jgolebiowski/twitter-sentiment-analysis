@@ -7,7 +7,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 
-filename = "dataset/train_dataset.pkl"
+filename = "dataset/test_dataset.pkl"
 with open(filename, "rb") as fp:
     data, labs, labels2names = pickle.load(fp)
 
@@ -40,5 +40,8 @@ for iteration in range(len(data)):
     result = am == local_labels.data
     score += result.numpy()[0]
     tries += 1
+    
+    if (iteration % 1000 == 0) and (iteration != 0):
+        print("GOing through iteration", iteration)
 
 print("Score:", score, "Tries:", tries, "Accuracy:", score / tries)
