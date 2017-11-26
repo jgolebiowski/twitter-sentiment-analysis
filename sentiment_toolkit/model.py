@@ -47,9 +47,11 @@ class MySecondRNN(nn.Module):
         seq_len, batch_size, num_features = x.size()
         if next(self.parameters()).is_cuda:
             h_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden).cuda())
+            c_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden).cuda())
         else:
             h_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden))
-        out, *hidden = self.RNN(x, h_0)
+            c_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden))
+        out, *hidden = self.RNN(x, h_0, c_0)
 
         output = self.rnn2hidden(out[-1])
         output = nn.functional.relu(output)
