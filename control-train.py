@@ -83,6 +83,7 @@ for epoch in range(10):
     else:
         early_stop_counter = 0
 
+    last_accuracy = new_accuracy
     if early_stop_counter >= 3:
         break
     net.train()
