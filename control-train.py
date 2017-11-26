@@ -20,11 +20,9 @@ n_layers = 2
 
 net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output)
 print(net)
-for p in net.parameters():
-    p.data *= 0.01
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(net.parameters(), lr=1e-4)
+optimizer = optim.Adam(net.parameters())
 
 for epoch in range(10):
     running_loss = 0
