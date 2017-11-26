@@ -17,6 +17,8 @@ labs = labs
 filename = "trained_model.pkl"
 with open(filename, "rb") as fp:
     net = pickle.load(fp)
+    net.dropout.p = 0
+    net.RNN.dropout = 0
     net.eval()
 
 n_input, n_output = data[0].size(2), int(labs.max() + 1)
@@ -25,24 +27,31 @@ n_layers = net.n_layers
 
 print(net)
 
-score = 0
-tries = 0
 
-for iteration in range(len(data)):
-    inputs = data[iteration]
-    local_labels = labs[iteration]
+def test_network(net, test_dataset, test_labels):
+    """Run the accuracy on the test set"""
+    score = 0
+    tries = 0
 
-    inputs = Variable(inputs)
-    local_labels = Variable(local_labels)
+    for iteration in range(len(test_dataset)):
+        inputs = test_dataset[iteration]
+        local_labels = test_labels[iteration]
 
-    outputs = nn.functional.softmax(net(inputs))
-    m, am = torch.max(outputs.data, dim=1)
+        inputs = Variable(inputs)
+        local_labels = Variable(local_labels)
 
-    result = am == local_labels.data
-    score += result.numpy()[0]
-    tries += 1
-    
-    if (iteration % 1000 == 0) and (iteration != 0):
-        print("Going through iteration", iteration)
+        outputs = nn.functional.softmax(net(inputs))
+        m, am = torch.max(outputs.data, dim=1)
 
+        result = am == local_labels.data
+        score += result.numpy()[0]
+        tries += 1
+
+        if (iteration % 1000 == 0) and (iteration != 0):
+            print("Going through iteration", iteration)
+
+    return accuracy, score, tries
+
+
+accuracy, score, tries = test_network(net, data, labs)
 print("Score:", score, "Tries:", tries, "Accuracy:", score / tries)

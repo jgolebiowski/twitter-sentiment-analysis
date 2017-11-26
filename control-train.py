@@ -23,15 +23,15 @@ n_layers = 1
 filename = "trained_model.pkl"
 with open(filename, "rb") as fp:
     net = pickle.load(fp)
-    net.dropout.p = 0.45
-    net.RNN.dropout = 0.45
+    net.dropout.p = 0.40
+    net.RNN.dropout = 0.40
     net.train()
 
 print(net)
 net.cuda()
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(net.parameters())
+optimizer = optim.Adam(net.parameters(), lr=5e-4)
 
 for epoch in range(10):
     running_loss = 0
@@ -61,7 +61,7 @@ for epoch in range(10):
             running_loss = 0.0
 
     end = time.time()
-    print("Epoch time:", end - start)
+    print("Epoch time: %.1fs" % (end - start))
     net.zero_grad()
     net.cpu()
     net.eval()
