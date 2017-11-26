@@ -13,8 +13,14 @@ with open(filename, "rb") as fp:
 print(net)
 
 
-# sentence = ['layin', 'n', 'bed', 'with', 'a', 'headache', 'ughhh', '...', 'waitin', 'on', 'your', 'call', '...']
 sentence = ["I", "am", "really", "happy", "today"]
-
 name, label = st.sample_network(net, sentence)
-print(name, label)
+print(name, sentence)
+
+sentence = ["I", "am", "really", "unhappy", "today"]
+name, label = st.sample_network(net, sentence)
+print(name, sentence)
+
+sentence = ["I", "am", "worried", "we", "might", "not", "finish", "on", "time"]
+name, label = st.sample_network(net, sentence)
+print(name, sentence)
