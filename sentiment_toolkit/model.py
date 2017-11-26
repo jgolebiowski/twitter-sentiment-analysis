@@ -26,7 +26,7 @@ class MySecondRNN(nn.Module):
         self.n_hidden = n_hidden
         self.n_layers = n_layers
 
-        self.RNN = nn.LSTM(n_input, n_hidden, n_layers)
+        self.RNN = nn.RNN(n_input, n_hidden, n_layers)
         self.rnn2output = nn.Linear(n_hidden, n_output)
 
     def forward(self, x):
@@ -45,12 +45,12 @@ class MySecondRNN(nn.Module):
         seq_len, batch_size, num_features = x.size()
         if next(self.parameters()).is_cuda:
             h_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden).cuda())
-            c_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden).cuda())
+            # c_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden).cuda())
         else:
             h_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden))
-            c_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden))
-        out, *hidden = self.RNN(x, (h_0, c_0))
-        # out, *hidden = self.RNN(x, h_0)
+            # c_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden))
+        # out, *hidden = self.RNN(x, (h_0, c_0))
+        out, *hidden = self.RNN(x, h_0)
 
         output = self.rnn2output(out[-1])
 
