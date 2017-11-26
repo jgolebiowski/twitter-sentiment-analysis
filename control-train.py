@@ -28,6 +28,7 @@ optimizer = optim.Adam(net.parameters())
 
 for epoch in range(10):
     running_loss = 0
+    optimizer.param_groups[0]["lr"] *= 0.9
     start = time.time()
     for iteration in range(len(data)):
         inputs = data[iteration]
