@@ -14,12 +14,15 @@ def sample_network(net, sentence):
     net : torch.nn.model
         The network that is used ot classicy emotions
     sentence : list(str)
-        sentence in form of 
+        sentence in form of
 
     Returns
     -------
-    TYPE
-        Description
+    str
+        String name of the emotion
+
+    np.array
+        probability distribution over the emotions
     """
     inputs = embed_sentence(sentence)
     inputs = Variable(inputs)
