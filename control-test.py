@@ -43,6 +43,6 @@ for iteration in range(len(data)):
     tries += 1
     
     if (iteration % 1000 == 0) and (iteration != 0):
-        print("GOing through iteration", iteration)
+        print("Going through iteration", iteration)
 
 print("Score:", score, "Tries:", tries, "Accuracy:", score / tries)

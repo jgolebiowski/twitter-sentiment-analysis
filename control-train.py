@@ -19,7 +19,7 @@ n_input, n_output = data[0].size(2), int(labs.max() + 1)
 n_hidden = 512
 n_layers = 1
 
-net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output, drop_p=0.2)
+net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output, drop_p=0.35)
 # filename = "trained_model.pkl"
 # with open(filename, "rb") as fp:
 #     net = pickle.load(fp)
