@@ -83,7 +83,7 @@ for epoch in range(10):
     else:
         early_stop_counter = 0
 
-    if early_stop_counter >= 3:
+    if early_stop_counter >= 5:
         break
     net.train()
     net.cuda()
