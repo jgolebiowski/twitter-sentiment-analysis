@@ -19,10 +19,10 @@ n_input, n_output = data[0].size(2), int(labs.max() + 1)
 n_hidden = 512
 n_layers = 1
 
-# net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output)
-filename = "trained_model.pkl"
-with open(filename, "rb") as fp:
-    net = pickle.load(fp)
+net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output)
+# filename = "trained_model.pkl"
+# with open(filename, "rb") as fp:
+#     net = pickle.load(fp)
 print(net)
 net.cuda()
 
