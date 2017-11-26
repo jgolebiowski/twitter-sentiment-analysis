@@ -19,8 +19,8 @@ n_hidden = 512
 n_layers = 1
 
 net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output)
-net.cuda()
 print(net)
+net.cuda()
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(net.parameters())
