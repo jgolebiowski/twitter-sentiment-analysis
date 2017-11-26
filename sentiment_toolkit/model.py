@@ -26,7 +26,7 @@ class MySecondRNN(nn.Module):
         self.n_hidden = n_hidden
         self.n_layers = n_layers
 
-        self.RNN = nn.RNN(n_input, n_hidden, n_layers)
+        self.RNN = nn.GRU(n_input, n_hidden, n_layers)
         self.hidden2out = nn.Linear(n_hidden, n_output)
 
     def forward(self, x):
