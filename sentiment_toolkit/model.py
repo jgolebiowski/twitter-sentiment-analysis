@@ -27,6 +27,7 @@ class MySecondRNN(nn.Module):
         self.n_layers = n_layers
 
         self.RNN = nn.GRU(n_input, n_hidden, n_layers)
+        self.rnn2hidden = nn.Linear(n_hidden, n_hidden)
         self.hidden2out = nn.Linear(n_hidden, n_output)
 
     def forward(self, x):
@@ -48,7 +49,10 @@ class MySecondRNN(nn.Module):
         else:
             h_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden))
         out, *hidden = self.RNN(x, h_0)
-        output = self.hidden2out(out[-1])
+
+        output = self.rnn2hidden(out[-1])
+        output = nn.functional.relu(output)
+        output = self.hidden2out(output)
 
         return output
 
