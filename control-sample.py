@@ -13,7 +13,8 @@ with open(filename, "rb") as fp:
 print(net)
 
 
-sentence = ['layin', 'n', 'bed', 'with', 'a', 'headache', 'ughhh', '...', 'waitin', 'on', 'your', 'call', '...']
+# sentence = ['layin', 'n', 'bed', 'with', 'a', 'headache', 'ughhh', '...', 'waitin', 'on', 'your', 'call', '...']
+sentence = ["I", "am", "really", "happy", "today"]
 
 name, label = st.sample_network(net, sentence)
 print(name, label)
