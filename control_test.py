@@ -7,23 +7,6 @@ import torch.nn as nn
 import torch.optim as optim
 
 
-filename = "dataset/test_dataset.pkl"
-with open(filename, "rb") as fp:
-    data, labs, labels2names = pickle.load(fp)
-
-
-filename = "trained_model.pkl"
-with open(filename, "rb") as fp:
-    net = pickle.load(fp)
-    net.eval()
-
-n_input, n_output = data[0].size(2), int(labs.max() + 1)
-n_hidden = net.n_hidden
-n_layers = net.n_layers
-
-print(net)
-
-
 def test_network(net, test_dataset, test_labels):
     """Run the accuracy on the test set"""
     net.eval()
@@ -50,5 +33,21 @@ def test_network(net, test_dataset, test_labels):
     return score / tries, score, tries
 
 
-accuracy, score, tries = test_network(net, data, labs)
-print("Score:", score, "Tries:", tries, "Accuracy:", accuracy)
+if (__name__ == "__main__"):
+    filename = "dataset/test_dataset.pkl"
+    with open(filename, "rb") as fp:
+        data, labs, labels2names = pickle.load(fp)
+
+    filename = "trained_model.pkl"
+    with open(filename, "rb") as fp:
+        net = pickle.load(fp)
+        net.eval()
+
+    n_input, n_output = data[0].size(2), int(labs.max() + 1)
+    n_hidden = net.n_hidden
+    n_layers = net.n_layers
+
+    print(net)
+
+    accuracy, score, tries = test_network(net, data, labs)
+    print("Score:", score, "Tries:", tries, "Accuracy:", accuracy)
