@@ -19,6 +19,7 @@ n_hidden = 256
 n_layers = 2
 
 net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output)
+net.cuda()
 print(net)
 
 criterion = nn.CrossEntropyLoss()
@@ -30,8 +31,10 @@ for epoch in range(10):
         inputs = data[iteration]
         local_labels = labs[iteration]
 
-        inputs = Variable(inputs)
-        local_labels = Variable(local_labels)
+        # inputs = Variable(inputs)
+        # local_labels = Variable(local_labels)
+        inputs = Variable(inputs.cuda())
+        local_labels = Variable(local_labels.cuda())
 
         optimizer.zero_grad()
         outputs = net(inputs)
@@ -47,7 +50,7 @@ for epoch in range(10):
                   (epoch, iteration, running_loss / 1000))
             running_loss = 0.0
 
-net.zero_grad()
-filename = "trained_model.pkl"
-with open(filename, "wb") as fp:
-    pickle.dump(net, fp)
+    net.zero_grad()
+    filename = "trained_model.pkl"
+    with open(filename, "wb") as fp:
+        pickle.dump(net, fp)
