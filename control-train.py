@@ -6,7 +6,7 @@ import torch
 from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
-from .control_test import test_network
+from control_test import test_network
 
 
 filename = "dataset/train_dataset.pkl"
