@@ -22,17 +22,17 @@ n_input, n_output = data[0].size(2), int(labs.max() + 1)
 n_hidden = 512
 n_layers = 1
 
-# net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output, drop_p=0.35)
-filename = "trained_model.pkl"
-with open(filename, "rb") as fp:
-    net = pickle.load(fp)
-    net.train()
+net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output, drop_p=0.5)
+# filename = "trained_model.pkl"
+# with open(filename, "rb") as fp:
+#     net = pickle.load(fp)
+#     net.train()
 
 print(net)
 net.cuda()
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(net.parameters(), lr=2e-4)
+optimizer = optim.Adam(net.parameters(), lr=1e-3)
 
 last_accuracy = 0
 early_stop_counter = 0
@@ -78,11 +78,13 @@ for epoch in range(100):
     print("New acc:", new_accuracy, "Old acc:", last_accuracy)
     if new_accuracy < last_accuracy:
         early_stop_counter += 1
+        print(early_stop_counter)
     else:
         early_stop_counter = 0
 
     last_accuracy = new_accuracy
     if early_stop_counter == 3:
         break
+
     net.train()
     net.cuda()
