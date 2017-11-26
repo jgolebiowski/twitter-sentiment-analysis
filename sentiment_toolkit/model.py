@@ -8,7 +8,7 @@ from torch.autograd import Variable
 class MySecondRNN(nn.Module):
     """More involved RNN network"""
 
-    def __init__(self, n_input, n_hidden, n_layers, n_output):
+    def __init__(self, n_input, n_hidden, n_layers, n_output, drop_p=0.2):
         """Summary
 
         Parameters
@@ -25,8 +25,10 @@ class MySecondRNN(nn.Module):
         super().__init__()
         self.n_hidden = n_hidden
         self.n_layers = n_layers
+        self.drop_p = drop_p
 
-        self.RNN = nn.LSTM(n_input, n_hidden, n_layers)
+        self.RNN = nn.LSTM(n_input, n_hidden, n_layers, dropout=drop_p)
+        self.dropout = nn.Dropout(p=drop_p)
         self.rnn2output = nn.Linear(n_hidden, n_output)
 
     def forward(self, x):
@@ -52,9 +54,22 @@ class MySecondRNN(nn.Module):
         out, *hidden = self.RNN(x, (h_0, c_0))
         # out, *hidden = self.RNN(x, h_0)
 
-        output = self.rnn2output(out[-1])
+        output = self.dropout(out[-1])
+        output = self.rnn2output(output)
 
         return output
+
+    def set_training_dropout(self):
+        """Set dropout to training"""
+        self.training = True
+        self.dropout.training = True
+        self.RNN.training = True
+
+    def set_testing_dropout(self):
+        """Set dropout to testing"""
+        self.training = False
+        self.dropout.training = False
+        self.RNN.training = False
 
 
 class MyRNN(nn.Module):

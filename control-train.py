@@ -19,7 +19,7 @@ n_input, n_output = data[0].size(2), int(labs.max() + 1)
 n_hidden = 512
 n_layers = 1
 
-net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output)
+net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output, drop_p=0.2)
 # filename = "trained_model.pkl"
 # with open(filename, "rb") as fp:
 #     net = pickle.load(fp)
@@ -60,7 +60,11 @@ for epoch in range(10):
     print("Epoch time:", end - start)
     net.zero_grad()
     net.cpu()
+    net.set_testing_dropout()
+
     filename = "trained_model.pkl"
     with open(filename, "wb") as fp:
         pickle.dump(net, fp)
+
+    net.set_training_dropout()
     net.cuda()
