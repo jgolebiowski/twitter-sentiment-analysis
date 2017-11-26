@@ -43,7 +43,7 @@ class MySecondRNN(nn.Module):
             final output of the network
         """
         seq_len, batch_size, num_features = x.size()
-        h_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden))
+        h_0 = Variable(torch.zeros(self.n_layers, batch_size, self.n_hidden).cuda())
 
         out, *hidden = self.RNN(x, h_0)
         output = self.hidden2out(out[-1])
