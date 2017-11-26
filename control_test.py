@@ -11,8 +11,6 @@ filename = "dataset/test_dataset.pkl"
 with open(filename, "rb") as fp:
     data, labs, labels2names = pickle.load(fp)
 
-data = data
-labs = labs
 
 filename = "trained_model.pkl"
 with open(filename, "rb") as fp:
@@ -30,6 +28,7 @@ print(net)
 
 def test_network(net, test_dataset, test_labels):
     """Run the accuracy on the test set"""
+    net.eval()
     score = 0
     tries = 0
 

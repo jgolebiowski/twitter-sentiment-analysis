@@ -6,14 +6,17 @@ import torch
 from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
+from .control_test import test_network
 
 
 filename = "dataset/train_dataset.pkl"
 with open(filename, "rb") as fp:
     data, labs, labels2names = pickle.load(fp)
 
-data = data
-labs = labs
+filename = "dataset/test_dataset.pkl"
+with open(filename, "rb") as fp:
+    data_test, labs_test, labels2names = pickle.load(fp)
+
 
 n_input, n_output = data[0].size(2), int(labs.max() + 1)
 n_hidden = 512
@@ -33,6 +36,8 @@ net.cuda()
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(net.parameters(), lr=5e-4)
 
+last_accuracy = 0
+early_stop_counter = 0
 for epoch in range(10):
     running_loss = 0
     optimizer.param_groups[0]["lr"] *= 0.9
@@ -70,5 +75,15 @@ for epoch in range(10):
     with open(filename, "wb") as fp:
         pickle.dump(net, fp)
 
+    # Early stopping
+    new_accuracy = test_network(net, data_test, labs_test)
+    print("New acc:", new_accuracy, "Old acc:", last_accuracy)
+    if new_accuracy < last_accuracy:
+        early_stop_counter += 1
+    else:
+        early_stop_counter = 0
+
+    if early_stop_counter >= 5:
+        break
     net.train()
     net.cuda()
