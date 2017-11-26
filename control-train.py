@@ -26,8 +26,6 @@ net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output, drop_p=0.35)
 # filename = "trained_model.pkl"
 # with open(filename, "rb") as fp:
 #     net = pickle.load(fp)
-#     net.dropout.p = 0.50
-#     net.RNN.dropout = 0.50
 #     net.train()
 
 print(net)
