@@ -1,4 +1,6 @@
-"""Loading and operating on the dataset"""
+"""Loading and operating on the dataset
+data from: https://data.world/crowdflower/sentiment-analysis-in-text
+"""
 import pickle
 import os
 import numpy as np
