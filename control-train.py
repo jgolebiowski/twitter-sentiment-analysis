@@ -36,7 +36,7 @@ optimizer = optim.Adam(net.parameters())
 
 last_accuracy = 0
 early_stop_counter = 0
-for epoch in range(10):
+for epoch in range(100):
     running_loss = 0
     optimizer.param_groups[0]["lr"] *= 0.9
     start = time.time()
