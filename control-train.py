@@ -82,7 +82,7 @@ for epoch in range(100):
         early_stop_counter = 0
 
     last_accuracy = new_accuracy
-    if early_stop_counter >= 3:
+    if early_stop_counter == 3:
         break
     net.train()
     net.cuda()
