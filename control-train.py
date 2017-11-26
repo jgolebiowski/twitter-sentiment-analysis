@@ -23,6 +23,8 @@ net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output, drop_p=0.2)
 # filename = "trained_model.pkl"
 # with open(filename, "rb") as fp:
 #     net = pickle.load(fp)
+#     net.train()
+
 print(net)
 net.cuda()
 
