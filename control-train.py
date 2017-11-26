@@ -76,7 +76,7 @@ for epoch in range(10):
         pickle.dump(net, fp)
 
     # Early stopping
-    new_accuracy = test_network(net, data_test, labs_test)
+    new_accuracy, *_ = test_network(net, data_test, labs_test)
     print("New acc:", new_accuracy, "Old acc:", last_accuracy)
     if new_accuracy < last_accuracy:
         early_stop_counter += 1
