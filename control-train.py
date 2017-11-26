@@ -16,7 +16,7 @@ labs = labs
 
 n_input, n_output = data[0].size(2), int(labs.max() + 1)
 n_hidden = 512
-n_layers = 1
+n_layers = 2
 
 net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output)
 net.cuda()
