@@ -11,12 +11,12 @@ filename = "dataset/train_dataset.pkl"
 with open(filename, "rb") as fp:
     data, labs, labels2names = pickle.load(fp)
 
-data = data[0:10000]
-labs = labs[0:10000]
+data = data
+labs = labs
 
 n_input, n_output = data[0].size(2), int(labs.max() + 1)
 n_hidden = 256
-n_layers = 1
+n_layers = 2
 
 net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output)
 print(net)
@@ -24,7 +24,7 @@ for p in net.parameters():
     p.data *= 0.01
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(net.parameters())
+optimizer = optim.Adam(net.parameters(), lr=1e-4)
 
 for epoch in range(10):
     running_loss = 0
