@@ -18,7 +18,7 @@ sentence = ["I", "am", "really", "happy", "today"]
 name, label = st.sample_network(net, sentence)
 print(name, sentence)
 
-sentence = ["I", "am", "really", "unhappy", "today"]
+sentence = ["I", "am", "really", "sad", "today"]
 name, label = st.sample_network(net, sentence)
 print(name, sentence)
 
