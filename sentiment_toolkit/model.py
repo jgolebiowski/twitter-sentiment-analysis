@@ -27,7 +27,7 @@ class MySecondRNN(nn.Module):
         self.n_layers = n_layers
 
         self.RNN = nn.GRU(n_input, n_hidden, n_layers)
-        self.rnn2hidden = nn.Linear(n_hidden, n_hidden)
+        self.rnn2output = nn.Linear(n_hidden, n_output)
 
     def forward(self, x):
         """All of the steps forward
@@ -52,7 +52,7 @@ class MySecondRNN(nn.Module):
         # out, *hidden = self.RNN(x, (h_0, c_0))
         out, *hidden = self.RNN(x, h_0)
 
-        output = self.rnn2hidden(out[-1])
+        output = self.rnn2output(out[-1])
 
         return output
 
