@@ -49,8 +49,8 @@ def test_network(net, test_dataset, test_labels):
         if (iteration % 1000 == 0) and (iteration != 0):
             print("Going through iteration", iteration)
 
-    return accuracy, score, tries
+    return score / tries, score, tries
 
 
 accuracy, score, tries = test_network(net, data, labs)
-print("Score:", score, "Tries:", tries, "Accuracy:", score / tries)
+print("Score:", score, "Tries:", tries, "Accuracy:", accuracy)
