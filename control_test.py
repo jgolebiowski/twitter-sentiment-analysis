@@ -15,8 +15,6 @@ with open(filename, "rb") as fp:
 filename = "trained_model.pkl"
 with open(filename, "rb") as fp:
     net = pickle.load(fp)
-    net.dropout.p = 0
-    net.RNN.dropout = 0
     net.eval()
 
 n_input, n_output = data[0].size(2), int(labs.max() + 1)
