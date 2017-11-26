@@ -53,4 +53,4 @@ for epoch in range(10):
     net.zero_grad()
     filename = "trained_model.pkl"
     with open(filename, "wb") as fp:
-        pickle.dump(net, fp)
+        pickle.dump(net.cpu(), fp)
