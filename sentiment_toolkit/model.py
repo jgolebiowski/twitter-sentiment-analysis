@@ -26,7 +26,7 @@ class MySecondRNN(nn.Module):
         self.n_hidden = n_hidden
         self.n_layers = n_layers
 
-        self.RNN = nn.RNN(n_input, n_hidden, n_layers)
+        self.RNN = nn.LSTM(n_input, n_hidden, n_layers)
         self.rnn2output = nn.Linear(n_hidden, n_output)
 
     def forward(self, x):
