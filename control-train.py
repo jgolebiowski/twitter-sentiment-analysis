@@ -60,11 +60,11 @@ for epoch in range(10):
     print("Epoch time:", end - start)
     net.zero_grad()
     net.cpu()
-    net.set_testing_dropout()
+    net.eval()
 
     filename = "trained_model.pkl"
     with open(filename, "wb") as fp:
         pickle.dump(net, fp)
 
-    net.set_training_dropout()
+    net.train()
     net.cuda()

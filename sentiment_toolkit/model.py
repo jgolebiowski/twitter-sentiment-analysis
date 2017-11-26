@@ -59,18 +59,6 @@ class MySecondRNN(nn.Module):
 
         return output
 
-    def set_training_dropout(self):
-        """Set dropout to training"""
-        self.training = True
-        self.dropout.training = True
-        self.RNN.training = True
-
-    def set_testing_dropout(self):
-        """Set dropout to testing"""
-        self.training = False
-        self.dropout.training = False
-        self.RNN.training = False
-
 
 class MyRNN(nn.Module):
     """SImple RNN network"""
