@@ -1,5 +1,6 @@
 """Control script for using the module"""
 import pickle
+import time
 import sentiment_toolkit as st
 import torch
 from torch.autograd import Variable
@@ -15,7 +16,7 @@ data = data
 labs = labs
 
 n_input, n_output = data[0].size(2), int(labs.max() + 1)
-n_hidden = 512
+n_hidden = 1024
 n_layers = 1
 
 net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output)
@@ -27,6 +28,7 @@ optimizer = optim.Adam(net.parameters())
 
 for epoch in range(10):
     running_loss = 0
+    start = time.time()
     for iteration in range(len(data)):
         inputs = data[iteration]
         local_labels = labs[iteration]
@@ -50,6 +52,8 @@ for epoch in range(10):
                   (epoch, iteration, running_loss / 1000))
             running_loss = 0.0
 
+    end = time.time()
+    print("Epoch time:", end - start)
     net.zero_grad()
     net.cpu()
     filename = "trained_model.pkl"
