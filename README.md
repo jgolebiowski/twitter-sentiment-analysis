@@ -36,6 +36,7 @@ GPL
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
 
+   [Python]: <https://www.python.org/>
    [here]: <https://data.world/crowdflower/sentiment-analysis-in-text>
    [Speemo]: <https://github.com/TSM-Hackers/speemo>
    [NLTK]: <http://www.nltk.org/>
