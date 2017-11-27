@@ -9,18 +9,18 @@ In a variation on the popular task of sentiment analysis, this dataset contains 
 
 ### Pre-processing
 
-Individual words were extracted from Tweets using the Twitter Tokenizer from [NLTK] and later converted to vectors using the [GloVe] embedding scheme.
+Individual words were extracted from tweets using the Twitter Tokenizer from [NLTK] and later converted to vectors using the [GloVe] embedding scheme.
 
 ### Model
 
-The model is composed of a Recurrent NN with 512 LSTM hidden units connected to 6 output units by a linear layer. Throughput the training, dropout ration of 0.5 was used on the LSTM units and Linear Layer.
+The model is composed of a Recurrent NN with 512 LSTM hidden units connected to 6 output units by a Linear Layer. Throughput the training, dropout ration of 0.5 was used on the LSTM units and Linear Layer.
 
 ### Training
 
 Training was performed using an Adam SGD algorithm with early stopping. Best results achieved after 10 epochs.
 
 ### Dependencies
-* [Python] 3.5 or above
+* [Python] - 3.5 or above
 * [pyTorch] - Machine Learning Toolkit
 * [torchtext] - Data loaders and abstractions for text and NLP
 * [NLTK] - The Natural Language Toolkit
