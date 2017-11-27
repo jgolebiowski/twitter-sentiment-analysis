@@ -38,7 +38,6 @@ last_accuracy = 0
 early_stop_counter = 0
 for epoch in range(100):
     running_loss = 0
-    optimizer.param_groups[0]["lr"] *= 0.9
     start = time.time()
     for iteration in range(len(data)):
         inputs = data[iteration]
@@ -63,8 +62,11 @@ for epoch in range(100):
                   (epoch, iteration, running_loss / 1000))
             running_loss = 0.0
 
+    # ------ After-epoch processing
     end = time.time()
     print("Epoch time: %.1fs" % (end - start))
+
+    # Save the network
     net.zero_grad()
     net.cpu()
     net.eval()
@@ -73,7 +75,7 @@ for epoch in range(100):
     with open(filename, "wb") as fp:
         pickle.dump(net, fp)
 
-    # Early stopping
+    # Check early stopping
     new_accuracy, *_ = test_network(net, data_test, labs_test)
     print("New acc:", new_accuracy, "Old acc:", last_accuracy)
     if new_accuracy < last_accuracy:
@@ -86,5 +88,6 @@ for epoch in range(100):
     if early_stop_counter == 5:
         break
 
+    # Prepare next epoch
     net.train()
     net.cuda()
