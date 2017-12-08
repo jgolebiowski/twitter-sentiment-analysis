@@ -59,6 +59,48 @@ class MySecondRNN(nn.Module):
 
         return output
 
+    def test_network(self, test_dataset, test_labels):
+        """Run the accuracy on the test set
+
+        Parameters
+        ----------
+        test_dataset : Variable with dims (seq_len, batch_size, num_features)
+            test data
+        test_labels : Variable(batch_size, )
+            labels
+
+        Returns
+        -------
+        float
+            relative_score
+        float
+            score
+        float
+            # elements in test set
+        """
+        self.eval()
+        score = 0
+        tries = 0
+
+        for iteration in range(len(test_dataset)):
+            inputs = test_dataset[iteration]
+            local_labels = test_labels[iteration]
+
+            inputs = Variable(inputs)
+            local_labels = Variable(local_labels)
+
+            outputs = nn.functional.softmax(self(inputs))
+            m, am = torch.max(outputs.data, dim=1)
+
+            result = am == local_labels.data
+            score += result.numpy()[0]
+            tries += 1
+
+            if (iteration % 1000 == 0) and (iteration != 0):
+                print("Going through iteration", iteration)
+
+        return score / tries, score, tries
+
 
 class MyRNN(nn.Module):
     """SImple RNN network"""

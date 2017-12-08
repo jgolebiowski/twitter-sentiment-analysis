@@ -6,7 +6,6 @@ import torch
 from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
-from rnn_control_test import test_network
 
 
 filename = "dataset/train_dataset.pkl"
@@ -76,7 +75,7 @@ for epoch in range(100):
         pickle.dump(net, fp)
 
     # Check early stopping
-    new_accuracy, *_ = test_network(net, data_test, labs_test)
+    new_accuracy, *_ = net.test_network(data_test, labs_test)
     print("New acc:", new_accuracy, "Old acc:", last_accuracy)
     if new_accuracy < last_accuracy:
         early_stop_counter += 1
