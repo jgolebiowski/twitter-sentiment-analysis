@@ -7,7 +7,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 
-filename = "trained_model.pkl"
+filename = "trained_model_rnn.pkl"
 with open(filename, "rb") as fp:
     net = pickle.load(fp)
     net.eval()

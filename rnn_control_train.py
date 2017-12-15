@@ -22,7 +22,7 @@ n_hidden = 512
 n_layers = 1
 
 net = st.MySecondRNN(n_input, n_hidden, n_layers, n_output, drop_p=0.5)
-# filename = "trained_model.pkl"
+# filename = "trained_model_rnn.pkl"
 # with open(filename, "rb") as fp:
 #     net = pickle.load(fp)
 #     net.train()
@@ -70,7 +70,7 @@ for epoch in range(100):
     net.cpu()
     net.eval()
 
-    filename = "trained_model.pkl"
+    filename = "trained_model_rnn.pkl"
     with open(filename, "wb") as fp:
         pickle.dump(net, fp)
 
